@@ -1,4 +1,3 @@
-# AppHotels
 # API NODE JS
 1. Ubicarse en el directorio raiz y ejecutar: npm run dev
 
