@@ -1,0 +1,279 @@
+<nav>
+	<svg-icon   src="/assets/logo/logo-almundo.svg"></svg-icon>
+</nav>
+<div class="container-fluid">
+ 
+  <!-- Search hotels-->	
+  <div class="row contenedor" style="padding-left: 20px">
+    <div class="col-md-3" style="margin-right: 0px;">
+    	<div class="card " style="width: 18rem;">
+		    <h6 class="card-title cardFilters colorNegroClaro"><b>Filtros</b></h6>
+		</div>
+		<div class="card " style="width: 18rem;">
+		    <!--Accordion wrapper-->
+			<div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+			  <!-- Accordion card -->
+			  <div class="card">
+			    <!-- Card header -->
+			    <div class="card-header" role="tab" id="headingOne1">
+			      <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+			        <h6 class="mb-0">
+			          <svg-icon class="filters" src="/assets/filters/search.svg"></svg-icon>
+			          <span class="glyphicon glyphicon-search " aria-hidden="true"></span><b class="colorWords sizeWord"> Nombre del Hotel</b><i class="fa fa-angle-down rotate-icon"></i>
+			        </h6>
+			      </a>
+			    </div>
+			    <!-- Card body -->
+			    <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+			      <div class="card-body">
+					<form class="navbar-form navbar-left">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-7">
+									<input type="text" class="form-control inputName" placeholder="Ingrese el nombre del hotel" [(ngModel)]="name" name="name">
+								</div>
+								<div class="col-md-1">
+									<button type="submit" class="btn btn-primary buttonAcept" (click)="getHotelByName(name)">Aceptar</button>
+								</div>
+							</div>							
+						</div>
+					</form>
+			      </div>
+			    </div>
+
+			  </div>
+			  <!-- Accordion card -->
+			</div>
+			<!-- Finish Accordion wrapper -->
+			
+			<!--Accordion wrapper-->
+			<div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+			  <!-- Accordion card -->
+			  <div class="card">
+			    <!-- Card header -->
+			    <div class="card-header" role="tab" id="headingOne1">
+			      <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+			        <h6 class="mb-0">
+			        	<svg-icon class="filters" src="/assets/filters/star.svg"></svg-icon>	
+			            <b class="colorWords sizeWord"> Estrellas</b><i class="fa fa-angle-down rotate-icon"></i>
+			        </h6>
+			      </a>
+			    </div>
+			    <!-- Card body -->
+			    <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+			      <div class="card-body">
+		        	
+		        	<div class="form-check" >
+					  <input class="form-check-input" type="radio" name="starsHotel"  value="all" 
+					  [(ngModel)] = "radioData" (click)="getHotelsFilterByStars()">
+					  <label class="form-check-label sizeWord colorNegroClaro" for="exampleRadios1">
+					    <b>Todas las estrellas</b>
+					  </label><br>
+					  <input class="form-check-input" type="radio" name="starsHotel"  value="5" 
+					  [(ngModel)] = "radioData" (click)="getHotelsFilterByStars()">
+					  <label class="form-check-label" for="exampleRadios1">
+					    <svg-icon *ngFor="let in of [0,1,2,3,4]" class="star" src="/assets/filters/star.svg"></svg-icon>
+					  </label><br>
+					  <input class="form-check-input" type="radio" name="starsHotel"  value="4" 
+					  [(ngModel)] = "radioData" (click)="getHotelsFilterByStars()">
+					  <label class="form-check-label" for="exampleRadios1">
+					    <svg-icon *ngFor="let in of [0,1,2,3]" class="star" src="/assets/filters/star.svg"></svg-icon>
+					  </label><br>
+					  <input class="form-check-input" type="radio" name="starsHotel"  value="3" 
+					  [(ngModel)] = "radioData" (click)="getHotelsFilterByStars()">
+					  <label class="form-check-label" for="exampleRadios1">
+					    <svg-icon *ngFor="let in of [0,1,2]" class="star" src="/assets/filters/star.svg"></svg-icon>
+					  </label><br>
+					  <input class="form-check-input" type="radio" name="starsHotel"  value="2" 
+					  [(ngModel)] = "radioData" (click)="getHotelsFilterByStars()">
+					  <label class="form-check-label" for="exampleRadios1">
+					    <svg-icon *ngFor="let in of [0,1]" class="star" src="/assets/filters/star.svg"></svg-icon>
+					  </label><br>
+					  <input class="form-check-input" type="radio" name="starsHotel"  value="1" 
+					  [(ngModel)] = "radioData" (click)="getHotelsFilterByStars()">
+					  <label class="form-check-label" for="exampleRadios1">
+						<svg-icon *ngFor="let in of [0]" class="star" src="/assets/filters/star.svg"></svg-icon>
+					  </label>
+					</div>
+			      </div>
+			    </div>
+			  </div>
+			  <!-- Accordion card -->
+			</div>
+			<!--Finish Accordion wrapper -->
+		</div>
+    </div>
+	
+	<!--All Hotels  -->
+    <div class="col-md-9"  style="padding-right: -100px" *ngIf="isShowAllHotels" >
+    	<div class="card w-75 cardRepeat" *ngFor="let hotel of hotels">
+    		<div class="row">
+    			<div class="col-md-4">
+					<div class="card-image" >
+						<img width="250" height="160" alt="Card image cap"  src="{{ urlImg +'/'+ hotel.image }}" alt="Card image cap">
+					</div>
+    			</div>
+
+    			<div class="col-md-5 colHotel">
+					<p class="card-title colorWords"><b>{{ hotel.name }}</b></p>
+			    	<svg-icon *ngFor="let in of arr(hotel.stars)" class="star" src="/assets/filters/star.svg"></svg-icon><br>
+			    	
+			    	<svg-icon class="amenities" src="/assets/amenities/bathrobes.svg" *ngIf="hotel.amenities[0]=='bathrobes' || hotel.amenities[1]=='bathrobes' || hotel.amenities[2]=='bathrobes' || hotel.amenities[3]=='bathrobes' || hotel.amenities[4]=='bathrobes'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/bathtub.svg" *ngIf="hotel.amenities[0]=='bathtub' || hotel.amenities[1]=='bathtub' || hotel.amenities[2]=='bathtub' || hotel.amenities[3]=='bathtub' || hotel.amenities[4]=='bathtub'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/beach.svg" *ngIf="hotel.amenities[0]=='beach' || hotel.amenities[1]=='beach' || hotel.amenities[2]=='beach' || hotel.amenities[3]=='beach' || hotel.amenities[4]=='beach'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/beach-pool-facilities.svg" *ngIf="hotel.amenities[0]=='beach-pool-facilities' || hotel.amenities[1]=='beach-pool-facilities' || hotel.amenities[2]=='beach-pool-facilities' || hotel.amenities[3]=='beach-pool-facilities' || hotel.amenities[4]=='beach-pool-facilities'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/business-center.svg" *ngIf="hotel.amenities[0]=='business-center' || hotel.amenities[1]=='business-center' || hotel.amenities[2]=='business-center' || hotel.amenities[3]=='business-center' || hotel.amenities[4]=='business-center'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/children-club.svg" *ngIf="hotel.amenities[0]=='children-club' || hotel.amenities[1]=='children-club' || hotel.amenities[2]=='children-club' || hotel.amenities[3]=='children-club' || hotel.amenities[4]=='children-club'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/coffe-maker.svg" *ngIf="hotel.amenities[0]=='coffe-maker' || hotel.amenities[1]=='coffe-maker' || hotel.amenities[2]=='coffe-maker' || hotel.amenities[3]=='coffe-maker' || hotel.amenities[4]=='coffe-maker'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/deep-soaking-bathtub.svg" *ngIf="hotel.amenities[0]=='deep-soaking-bathtub' || hotel.amenities[1]=='deep-soaking-bathtub' || hotel.amenities[2]=='deep-soaking-bathtub' || hotel.amenities[3]=='deep-soaking-bathtub' || hotel.amenities[4]=='deep-soaking-bathtub'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/fitness-center.svg" *ngIf="hotel.amenities[0]=='fitness-center' || hotel.amenities[1]=='fitness-center' || hotel.amenities[2]=='fitness-center' || hotel.amenities[3]=='fitness-center' || hotel.amenities[4]=='fitness-center'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/garden.svg" *ngIf="hotel.amenities[0]=='garden' || hotel.amenities[1]=='garden' || hotel.amenities[2]=='garden' || hotel.amenities[3]=='garden' || hotel.amenities[4]=='garden'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/kitchen-facilities.svg" *ngIf="hotel.amenities[0]=='kitchen-facilities' || hotel.amenities[1]=='kitchen-facilities' || hotel.amenities[2]=='kitchen-facilities' || hotel.amenities[3]=='kitchen-facilities' || hotel.amenities[4]=='kitchen-facilities'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/newspaper.svg" *ngIf="hotel.amenities[0]=='newspaper' || hotel.amenities[1]=='newspaper' || hotel.amenities[2]=='newspaper' || hotel.amenities[3]=='newspaper' || hotel.amenities[4]=='newspaper'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/nightclub.svg" *ngIf="hotel.amenities[0]=='nightclub' || hotel.amenities[1]=='nightclub' || hotel.amenities[2]=='nightclub' || hotel.amenities[3]=='nightclub' || hotel.amenities[4]=='nightclub'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/restaurant.svg" *ngIf="hotel.amenities[0]=='restaurant' || hotel.amenities[1]=='restaurant' || hotel.amenities[2]=='restaurant' || hotel.amenities[3]=='restaurant' || hotel.amenities[4]=='restaurant'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/safety-box.svg" *ngIf="hotel.amenities[0]=='safety-box' || hotel.amenities[1]=='safety-box' || hotel.amenities[2]=='safety-box' || hotel.amenities[3]=='safety-box' || hotel.amenities[4]=='safety-box'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/separate-bredroom.svg" *ngIf="hotel.amenities[0]=='separate-bredroom' || hotel.amenities[1]=='separate-bredroom' || hotel.amenities[2]=='separate-bredroom' || hotel.amenities[3]=='separate-bredroom' || hotel.amenities[4]=='separate-bredroom'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/sheets.svg" *ngIf="hotel.amenities[0]=='sheets' || hotel.amenities[1]=='sheets' || hotel.amenities[2]=='sheets' || hotel.amenities[3]=='sheets' || hotel.amenities[4]=='sheets'"></svg-icon>
+    			</div>
+    			<div class="col-md-3 text-center " style="border-left: 1px dashed #ccc">
+					<p class="card-text sizeWord colorNegroClaro" style="padding-top: 15px">Precio por noche por habitación</p>
+					<h5 class="card-text colorPrice" style="margin-top: -10px"><span>ARS</span> <strong class="sizePrice"> {{ hotel.price }}</strong></h5>
+					<a href="#" class="btn btn-primary buttonShowHotel" style="margin-bottom: 20px">Ver Hotel</a>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+	
+	<!--Hotels Filter By Name -->
+    <div class="col-md-9" *ngIf="isShowAFilterHotelsByName" >
+    	<div class="card w-75 cardRepeat">
+    		<div class="row">
+    			<div class="col-md-4">
+					<div class="card-image" id="image">
+						<img width="250" height="160" alt="Card image cap"  src="{{ urlImg +'/'+ hotelByName.image }}" alt="Card image cap">
+					</div>
+    			</div>
+    			<div class="col-md-5 colHotel">
+					<h6 class="card-title colorWords"><b>{{ hotelByName.name }}</b></h6>
+			    	<svg-icon *ngFor="let in of arr(hotelByName.stars)" class="star" src="/assets/filters/star.svg"></svg-icon><br>
+						
+					<svg-icon class="amenities" src="/assets/amenities/bathrobes.svg" *ngIf="hotelByName.amenities[0]=='bathrobes' || hotelByName.amenities[1]=='bathrobes' || hotelByName.amenities[2]=='bathrobes' || hotelByName.amenities[3]=='bathrobes' || hotelByName.amenities[4]=='bathrobes'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/bathtub.svg" *ngIf="hotelByName.amenities[0]=='bathtub' || hotelByName.amenities[1]=='bathtub' || hotelByName.amenities[2]=='bathtub' || hotelByName.amenities[3]=='bathtub' || hotelByName.amenities[4]=='bathtub'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/beach.svg" *ngIf="hotelByName.amenities[0]=='beach' || hotelByName.amenities[1]=='beach' || hotelByName.amenities[2]=='beach' || hotelByName.amenities[3]=='beach' || hotelByName.amenities[4]=='beach'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/beach-pool-facilities.svg" *ngIf="hotelByName.amenities[0]=='beach-pool-facilities' || hotelByName.amenities[1]=='beach-pool-facilities' || hotelByName.amenities[2]=='beach-pool-facilities' || hotelByName.amenities[3]=='beach-pool-facilities' || hotelByName.amenities[4]=='beach-pool-facilities'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/business-center.svg" *ngIf="hotelByName.amenities[0]=='business-center' || hotelByName.amenities[1]=='business-center' || hotelByName.amenities[2]=='business-center' || hotelByName.amenities[3]=='business-center' || hotelByName.amenities[4]=='business-center'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/children-club.svg" *ngIf="hotelByName.amenities[0]=='children-club' || hotelByName.amenities[1]=='children-club' || hotelByName.amenities[2]=='children-club' || hotelByName.amenities[3]=='children-club' || hotelByName.amenities[4]=='children-club'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/coffe-maker.svg" *ngIf="hotelByName.amenities[0]=='coffe-maker' || hotelByName.amenities[1]=='coffe-maker' || hotelByName.amenities[2]=='coffe-maker' || hotelByName.amenities[3]=='coffe-maker' || hotelByName.amenities[4]=='coffe-maker'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/deep-soaking-bathtub.svg" *ngIf="hotelByName.amenities[0]=='deep-soaking-bathtub' || hotelByName.amenities[1]=='deep-soaking-bathtub' || hotelByName.amenities[2]=='deep-soaking-bathtub' || hotelByName.amenities[3]=='deep-soaking-bathtub' || hotelByName.amenities[4]=='deep-soaking-bathtub'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/fitness-center.svg" *ngIf="hotelByName.amenities[0]=='fitness-center' || hotelByName.amenities[1]=='fitness-center' || hotelByName.amenities[2]=='fitness-center' || hotelByName.amenities[3]=='fitness-center' || hotelByName.amenities[4]=='fitness-center'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/garden.svg" *ngIf="hotelByName.amenities[0]=='garden' || hotelByName.amenities[1]=='garden' || hotelByName.amenities[2]=='garden' || hotelByName.amenities[3]=='garden' || hotelByName.amenities[4]=='garden'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/kitchen-facilities.svg" *ngIf="hotelByName.amenities[0]=='kitchen-facilities' || hotelByName.amenities[1]=='kitchen-facilities' || hotelByName.amenities[2]=='kitchen-facilities' || hotelByName.amenities[3]=='kitchen-facilities' || hotelByName.amenities[4]=='kitchen-facilities'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/newspaper.svg" *ngIf="hotelByName.amenities[0]=='newspaper' || hotelByName.amenities[1]=='newspaper' || hotelByName.amenities[2]=='newspaper' || hotelByName.amenities[3]=='newspaper' || hotelByName.amenities[4]=='newspaper'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/nightclub.svg" *ngIf="hotelByName.amenities[0]=='nightclub' || hotelByName.amenities[1]=='nightclub' || hotelByName.amenities[2]=='nightclub' || hotelByName.amenities[3]=='nightclub' || hotelByName.amenities[4]=='nightclub'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/restaurant.svg" *ngIf="hotelByName.amenities[0]=='restaurant' || hotelByName.amenities[1]=='restaurant' || hotelByName.amenities[2]=='restaurant' || hotelByName.amenities[3]=='restaurant' || hotelByName.amenities[4]=='restaurant'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/safety-box.svg" *ngIf="hotelByName.amenities[0]=='safety-box' || hotelByName.amenities[1]=='safety-box' || hotelByName.amenities[2]=='safety-box' || hotelByName.amenities[3]=='safety-box' || hotelByName.amenities[4]=='safety-box'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/separate-bredroom.svg" *ngIf="hotelByName.amenities[0]=='separate-bredroom' || hotelByName.amenities[1]=='separate-bredroom' || hotelByName.amenities[2]=='separate-bredroom' || hotelByName.amenities[3]=='separate-bredroom' || hotelByName.amenities[4]=='separate-bredroom'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/sheets.svg" *ngIf="hotelByName.amenities[0]=='sheets' || hotelByName.amenities[1]=='sheets' || hotelByName.amenities[2]=='sheets' || hotelByName.amenities[3]=='sheets' || hotelByName.amenities[4]=='sheets'"></svg-icon>
+
+			    	
+    			</div>
+    			<div class="col-md-3 text-center " style="border-left: 1px dashed #ccc">
+					<p class="card-text sizeWord colorNegroClaro" style="padding-top: 15px">Precio por noche por habitación</p>
+					<h5 class="card-text colorPrice" style="margin-top: -10px"><span>ARS</span> <strong class="sizePrice"> {{ hotelByName.price }}</strong></h5>
+					<a href="#" class="btn btn-primary buttonShowHotel" style="margin-bottom: 20px">Ver Hotel</a>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <!--Hotels Filter By Stars -->
+	<div class="col-md-9" style="padding-right: -100px" *ngIf="isShowAFilterHotelsByStars" >
+		<div class="card w-75 cardRepeat"  *ngFor="let hotel of hotelByStars">
+			<div class="row">
+    			<div class="col-md-4">
+					<div class="card-image" >
+						<img width="250" height="160" alt="Card image cap"  src="{{ urlImg +'/'+ hotel.image }}" alt="Card image cap">
+					</div>
+    			</div>
+
+    			<div class="col-md-5 colHotel">
+					<p class="card-title colorWords"><b>{{ hotel.name }}</b></p>
+			    	<svg-icon *ngFor="let in of arr(hotel.stars)" class="star" src="/assets/filters/star.svg"></svg-icon><br>
+			    	
+			    	<svg-icon class="amenities" src="/assets/amenities/bathrobes.svg" *ngIf="hotel.amenities[0]=='bathrobes' || hotel.amenities[1]=='bathrobes' || hotel.amenities[2]=='bathrobes' || hotel.amenities[3]=='bathrobes' || hotel.amenities[4]=='bathrobes'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/bathtub.svg" *ngIf="hotel.amenities[0]=='bathtub' || hotel.amenities[1]=='bathtub' || hotel.amenities[2]=='bathtub' || hotel.amenities[3]=='bathtub' || hotel.amenities[4]=='bathtub'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/beach.svg" *ngIf="hotel.amenities[0]=='beach' || hotel.amenities[1]=='beach' || hotel.amenities[2]=='beach' || hotel.amenities[3]=='beach' || hotel.amenities[4]=='beach'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/beach-pool-facilities.svg" *ngIf="hotel.amenities[0]=='beach-pool-facilities' || hotel.amenities[1]=='beach-pool-facilities' || hotel.amenities[2]=='beach-pool-facilities' || hotel.amenities[3]=='beach-pool-facilities' || hotel.amenities[4]=='beach-pool-facilities'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/business-center.svg" *ngIf="hotel.amenities[0]=='business-center' || hotel.amenities[1]=='business-center' || hotel.amenities[2]=='business-center' || hotel.amenities[3]=='business-center' || hotel.amenities[4]=='business-center'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/children-club.svg" *ngIf="hotel.amenities[0]=='children-club' || hotel.amenities[1]=='children-club' || hotel.amenities[2]=='children-club' || hotel.amenities[3]=='children-club' || hotel.amenities[4]=='children-club'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/coffe-maker.svg" *ngIf="hotel.amenities[0]=='coffe-maker' || hotel.amenities[1]=='coffe-maker' || hotel.amenities[2]=='coffe-maker' || hotel.amenities[3]=='coffe-maker' || hotel.amenities[4]=='coffe-maker'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/deep-soaking-bathtub.svg" *ngIf="hotel.amenities[0]=='deep-soaking-bathtub' || hotel.amenities[1]=='deep-soaking-bathtub' || hotel.amenities[2]=='deep-soaking-bathtub' || hotel.amenities[3]=='deep-soaking-bathtub' || hotel.amenities[4]=='deep-soaking-bathtub'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/fitness-center.svg" *ngIf="hotel.amenities[0]=='fitness-center' || hotel.amenities[1]=='fitness-center' || hotel.amenities[2]=='fitness-center' || hotel.amenities[3]=='fitness-center' || hotel.amenities[4]=='fitness-center'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/garden.svg" *ngIf="hotel.amenities[0]=='garden' || hotel.amenities[1]=='garden' || hotel.amenities[2]=='garden' || hotel.amenities[3]=='garden' || hotel.amenities[4]=='garden'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/kitchen-facilities.svg" *ngIf="hotel.amenities[0]=='kitchen-facilities' || hotel.amenities[1]=='kitchen-facilities' || hotel.amenities[2]=='kitchen-facilities' || hotel.amenities[3]=='kitchen-facilities' || hotel.amenities[4]=='kitchen-facilities'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/newspaper.svg" *ngIf="hotel.amenities[0]=='newspaper' || hotel.amenities[1]=='newspaper' || hotel.amenities[2]=='newspaper' || hotel.amenities[3]=='newspaper' || hotel.amenities[4]=='newspaper'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/nightclub.svg" *ngIf="hotel.amenities[0]=='nightclub' || hotel.amenities[1]=='nightclub' || hotel.amenities[2]=='nightclub' || hotel.amenities[3]=='nightclub' || hotel.amenities[4]=='nightclub'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/restaurant.svg" *ngIf="hotel.amenities[0]=='restaurant' || hotel.amenities[1]=='restaurant' || hotel.amenities[2]=='restaurant' || hotel.amenities[3]=='restaurant' || hotel.amenities[4]=='restaurant'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/safety-box.svg" *ngIf="hotel.amenities[0]=='safety-box' || hotel.amenities[1]=='safety-box' || hotel.amenities[2]=='safety-box' || hotel.amenities[3]=='safety-box' || hotel.amenities[4]=='safety-box'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/separate-bredroom.svg" *ngIf="hotel.amenities[0]=='separate-bredroom' || hotel.amenities[1]=='separate-bredroom' || hotel.amenities[2]=='separate-bredroom' || hotel.amenities[3]=='separate-bredroom' || hotel.amenities[4]=='separate-bredroom'"></svg-icon>
+
+			    	<svg-icon class="amenities" src="/assets/amenities/sheets.svg" *ngIf="hotel.amenities[0]=='sheets' || hotel.amenities[1]=='sheets' || hotel.amenities[2]=='sheets' || hotel.amenities[3]=='sheets' || hotel.amenities[4]=='sheets'"></svg-icon>
+    			</div>
+    			<div class="col-md-3 text-center " style="border-left: 1px dashed #ccc">
+					<p class="card-text sizeWord colorNegroClaro" style="padding-top: 15px">Precio por noche por habitación</p>
+					<h5 class="card-text colorPrice" style="margin-top: -10px"><span>ARS</span> <strong class="sizePrice"> {{ hotel.price }}</strong></h5>
+					<a href="#" class="btn btn-primary buttonShowHotel" style="margin-bottom: 20px">Ver Hotel</a>
+    			</div>
+    		</div>
+		</div>
+	</div>
+</div>
+

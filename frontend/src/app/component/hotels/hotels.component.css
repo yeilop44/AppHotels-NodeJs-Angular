@@ -1,0 +1,86 @@
+nav {
+	background: #1a4380; 
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 10px;
+}
+
+.contenedor {
+	background: #f6f5f6;
+	padding-top: 25px; 
+}
+
+.cardRepeat {
+	margin-bottom: 10px; 
+	padding: 10px;
+
+}
+
+.colHotel {
+	padding-left: 40px;
+}
+
+.colorWords {
+	color: #2E83B4;
+	margin-bottom: -5px;
+}
+
+.buttonShowHotel {
+	padding-left: 38px;
+	padding-right: 38px;
+	background: #1a4380;
+}
+
+.buttonAcept {
+	padding-left: 10px;
+	padding-right: 10px;
+	background: #1a4380;
+}
+.inputName {
+	width:  150px;
+}
+
+
+.colorPrice {
+	color: #ca7029;
+}
+
+.sizePrice {
+	font-size: 27px;
+}
+
+
+.sizeWord {
+	font-size: 14px;
+}
+
+.colorNegroClaro {
+	color: #585858;
+}
+
+.star {
+	fill: #FFBB33;
+	width: 17px;
+	padding-left: 2px;
+	margin-top: 0px;
+}
+
+.amenities {
+	width: 17px;
+	margin-top: 8px;
+	margin-right: 8px;
+}
+
+.filters {
+	fill: #2E83B4;
+	width: 17px;	
+}
+
+.cardFilters {
+padding-top: 10px;
+padding-bottom: 5px;
+padding-left: 20px;
+
+}
+
+
